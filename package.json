@@ -1,0 +1,25 @@
+{
+  "name": "vending_machine",
+  "version": "1.0.0",
+  "description": "A REST API implementation of a vending machine",
+  "main": "server.js",
+  "scripts": {
+    "start": "tsc && node ./dist/server.js",
+    "dev": "nodemon ./src/server.ts",
+    "devdocker": "nodemon --legacy-watch ./src/server.ts",
+    "build": "tsc",
+    "test": "jest -c ./jest.unit.json",
+    "test:coverage": "jest --coverage -c ./jest.unit.json"
+  },
+  "author": "SamNdirangu",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "eslint": "^8.27.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
