@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "195ade6b-754c-4359-bef2-ab97f219f8c0",
+		"name": "Change",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "10452867-195ade6b-754c-4359-bef2-ab97f219f8c0"
+	},
+	"item": [
+		{
+			"name": "Get Change",
+			"id": "92cc3f37-637d-4322-b835-2e22d0ce251b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change"
+					]
+				},
+				"description": "Returns the current status of our change inventory, That is the quantity of different money denominations in the vending machine"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Change Inventory",
+			"id": "33b396cd-c78e-4779-adf3-39766e3c83dd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "changeJSON",
+							"value": "{\"1000\": 10,\"500\": 6,\"200\": 8,\"100\": 4,\"50\": 12,\"40\": 11,\"20\": 31,\"10\": 23,\"5\": 32,\"1\": 43}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change"
+					]
+				},
+				"description": "Swaps the existing change inventory with the provided change inventory"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Change Inventory",
+			"id": "4d89a9e2-0f2f-466f-aeed-4793d85cc760",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "deduct",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "changeJSON",
+							"value": "{\"1000\": 5, \"1002\":7}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change"
+					]
+				},
+				"description": "Adds or subtracts change from the change inventory\n\nProvide a true/false detect key\n\nProvide a changeJSON key such as {\"1000\":1, \"20\":22} with any of the available denominations to either add or deduct"
+			},
+			"response": []
+		}
+	]
+}
