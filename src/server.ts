@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
+app.get('/', homepage); //Simple home page to greet user
 // Endpoits Router ---------------------------------
 app.use('/api', apiRouter); //Add our API Router endpoint
-app.use('/', homepage); //Simple home page to greet user
 
 // Error Handlers -------------------------------------
 app.use(notFoundResponse);

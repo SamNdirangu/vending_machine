@@ -1,11 +1,11 @@
 import express from "express";
-import productsRouter from "./router.products";
+import publicRouter from "./router.public";
 import maintainanceRouter from "./router.maintainance";
 
 
 const apiRouter = express.Router();
 
-apiRouter.use("/products", productsRouter);
+apiRouter.use("/public", publicRouter);
 apiRouter.use("/maintainance", maintainanceRouter);
 
 

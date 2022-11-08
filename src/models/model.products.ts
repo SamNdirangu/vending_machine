@@ -1,4 +1,4 @@
-import productsInventory from "../data/data.products";
+import productsStatus from "../data/data.products";
 import errorResponses from "../errors/erros.custom";
 
 export type ProductSchema = {
@@ -8,23 +8,27 @@ export type ProductSchema = {
     quantity: number
 }
 
+type productUpdateParameters = { id: string, quantity: number, price: number };
+type productCreateParameters = { name: string, quantity: number, price: number };
+type productUpdateQuantityParameters = { id: string, quantity: number, deduct: boolean };
+
 class Products {
-    productsInventory: ProductSchema[];
+    productsStatus: ProductSchema[];
     constructor() {
-        this.productsInventory = productsInventory;
+        this.productsStatus = productsStatus;
     }
 
 
     /**Returns all products*/
     findAll(): ProductSchema[] | undefined {
-        return this.productsInventory;
+        return this.productsStatus;
     }
 
     /**Returns a product based on its ID */
     findByID(id: string): ProductSchema | undefined {
         let result;
-        for (let i = 0; i < this.productsInventory.length; i++) {
-            const product = this.productsInventory[i];
+        for (let i = 0; i < this.productsStatus.length; i++) {
+            const product = this.productsStatus[i];
             if (product._id == id) {
                 result = product;
                 break;
@@ -34,37 +38,55 @@ class Products {
     }
 
     /**Creates a new product based on its ID */
-    create(name: string, quantity: number, price: number): ProductSchema | undefined {
-        const _id: string = name + (this.productsInventory.length + 1).toString();
+    create({ name, price, quantity }: productCreateParameters): ProductSchema | undefined {
+        const _id: string = name + (this.productsStatus.length + 1).toString();
         const product: ProductSchema = {
             _id, name, quantity, price
         };
-        this.productsInventory.push(product);
+        this.productsStatus.push(product);
 
         return product;
     }
 
-    /**Adds a product quantiyt */
-    updateQuantity(id: string, quantity: number, deduct: boolean): ProductSchema {
-        for (let index = 0; index < this.productsInventory.length; index++) {
-            const product = this.productsInventory[index];
+    /**Updates a product slot quantity or price */
+    updateProductSlot({ id, quantity, price }: productUpdateParameters): ProductSchema {
+        for (let index = 0; index < this.productsStatus.length; index++) {
+            const product = this.productsStatus[index];
             if (product._id == id) {
-                if (!deduct) {
-                    this.productsInventory[index].quantity += Number(quantity);
-                    return this.productsInventory[index];
+                if (price != undefined) {
+                    if (price < 0) throw new errorResponses.BadRequest(`Price cannot be a negative number`);
+                    this.productsStatus[index].price = price;
                 }
 
-                if (product.quantity < quantity) {
-                    throw new errorResponses.BadRequest(`Quantity to deduct cannot exceed existing quantity`);
+                if (quantity != undefined) {
+                    if (quantity < 0) throw new errorResponses.BadRequest(`Quantity cannot be a negative number`);
+                    this.productsStatus[index].quantity = quantity;
                 }
+                return this.productsStatus[index];
+            }
+        }
+        throw new errorResponses.NotFound(`No product found with such id: ${id}`);
+    }
 
-                this.productsInventory[index].quantity -= quantity;
-                return this.productsInventory[index];
+    /**Adds or subtracts a product slot quantity */
+    updateSlotQuantity({ id, quantity, deduct }: productUpdateQuantityParameters): ProductSchema {
+        for (let index = 0; index < this.productsStatus.length; index++) {
+            const product = this.productsStatus[index];
+            if (product._id == id) {
+                if (deduct) {
+                    if (this.productsStatus[index].quantity - quantity < 0) {
+                        throw new errorResponses.BadRequest(`Quantity cannot be a negative number`);
+                    }
+                    this.productsStatus[index].quantity -= quantity;
+                } else {
+                    this.productsStatus[index].quantity += Number(quantity);
+                }
+                return this.productsStatus[index];
             }
         }
         throw new errorResponses.NotFound(`No product found with such id: ${id}`);
     }
 }
 
-const products = new Products();
-export default products;
+const productsInventory = new Products();
+export default productsInventory;

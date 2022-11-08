@@ -25,6 +25,8 @@ const homepage = async (req: express.Request, res: express.Response) => {
                     View current change in Machine
                 </a>
             </p>
+            
+            <p> Accepted denominations:: 1000,500,200,100,50,40,20,10,5,1</p>
 
         </div>
     `);

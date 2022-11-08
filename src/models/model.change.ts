@@ -3,6 +3,7 @@ import changeStatus from "../data/data.change";
 import errorResponses from "../errors/erros.custom";
 
 export type ChangeSchema = {
+    //2000: number //Can be easily modified to match different denominations of different currencies
     1000: number,
     500: number,
     200: number,
@@ -15,6 +16,7 @@ export type ChangeSchema = {
     1: number
 }
 export type ChangeResponseSchema = {
+    //2000?: number //Can be easily modified to match different denominations of different currencies
     1000?: number,
     500?: number,
     200?: number,
@@ -26,6 +28,7 @@ export type ChangeResponseSchema = {
     5?: number,
     1?: number
 }
+type UpdateChangeParameters = { changeDenominations: ChangeResponseSchema, isUpdate: boolean, deduct: boolean };
 
 class ChangeInventory {
     changeStatus: ChangeSchema;
@@ -34,16 +37,8 @@ class ChangeInventory {
     }
 
     /**Returns current change status */
-    getChange(): ChangeSchema {
+    getChangeStatus(): ChangeSchema {
         return this.changeStatus;
-    }
-
-    /**Returns  change amount of particular denomination status */
-    findByDenom(denomination: number): number | undefined {
-        type changeStatusKey = keyof typeof this.changeStatus
-        const statusKey = denomination as changeStatusKey;
-
-        return this.changeStatus[statusKey];
     }
 
     /**Returns  change amount of particular denomination status */
@@ -83,41 +78,55 @@ class ChangeInventory {
         return changeDenominations;
     }
 
-    /**Adds change to the inventory */
-    setChange(change: ChangeSchema): ChangeSchema | undefined {
-        type changeStatusKey = keyof typeof this.changeStatus
-
-        for (const key in changeStatus) {
-            if (change[key as unknown as changeStatusKey] == undefined) {
-                return undefined;
-            }
-        }
-        return this.changeStatus = change;
-    }
-
-
-
     /**Update change to the inventory, Perfroms both addition and deuctions*/
-    updateChange(changeDenominations: ChangeResponseSchema, deduct: boolean): ChangeSchema {
+    updateChange({ changeDenominations, isUpdate, deduct }: UpdateChangeParameters): ChangeSchema {
         type changeStatusKey = keyof typeof this.changeStatus
 
+        let tempStatus = this.changeStatus;
         // update the new change
         for (const property in changeDenominations) {
             const currentDenom = property as unknown as changeStatusKey;
             const currentDenomQty = changeDenominations[currentDenom];
 
-            if (this.changeStatus[currentDenom] == undefined) {
+            if (tempStatus[currentDenom] == undefined || currentDenomQty == undefined) {
                 throw new errorResponses.BadRequest(`There is no ${currentDenom} denomination`);
             }
-            if (deduct) {
-                this.changeStatus[currentDenom] -= currentDenomQty || 0;
+            if (isUpdate) {
+                if (deduct) {
+                    tempStatus[currentDenom] -= Number(currentDenomQty);
+                } else {
+                    tempStatus[currentDenom] += Number(currentDenomQty);
+                }
             } else {
-                this.changeStatus[currentDenom] += currentDenomQty || 0;
+                tempStatus[currentDenom] = currentDenomQty;
+            }
+            if (tempStatus[currentDenom] < 0) {
+                throw new errorResponses.BadRequest(`Cannot complete the ${currentDenom} denomination is below zero`);
             }
         }
+        this.changeStatus = tempStatus;
         return this.changeStatus;
     }
 
+    /**Calculates the total amount from ache to the inventory, Perfroms both addition and deuctions*/
+    computeAmount(amountDenominations: ChangeResponseSchema): number {
+        type changeStatusKey = keyof typeof this.changeStatus
+
+        // update the new change
+        let totalAmount = 0;
+        for (const property in amountDenominations) {
+            const currentDenom = property as unknown as changeStatusKey;
+            const currentDenomQty = amountDenominations[currentDenom];
+
+
+
+            if (this.changeStatus[currentDenom] == undefined || currentDenomQty == undefined) {
+                throw new errorResponses.BadRequest(`There is no support for ${currentDenom} denomination`);
+            }
+            totalAmount += currentDenomQty * currentDenom;
+        }
+        return totalAmount;
+    }
 }
 
 const changeInventory = new ChangeInventory();
