@@ -16,7 +16,7 @@ const homepage = async (req: express.Request, res: express.Response) => {
                 </a>
             </p>
             <p> 
-                <a href="/api/public/purchase?id=6368c982eef7cf49cfb99d75&quantity=1&amountJSON={"1000":2}" target="_blank">
+                <a href="/api/public/purchase?id=6368c982eef7cf49cfb99d75&quantity=1&amountJSON="{"1000":2}" target="_blank">
                     Purchase Random Product Oreos
                 </a>
             </p>
