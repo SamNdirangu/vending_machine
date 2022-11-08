@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config(); //Grab our envs
+/* eslint-disable @typescript-eslint/no-var-requires */
+require('dotenv').config();//Grab our envs
 import express from 'express';
 import 'express-async-errors'; //Automatically handles errors thrown from async functions eliminating need for try and catch
 import apiRouter from './routers/api.router';
@@ -23,7 +23,7 @@ app.use(notFoundResponse);
 app.use(errorHandlers); //Requires express-async-erros
 
 // Start our app ---------------------------------------
-const port = 80 || process.env.PORT; //Set up the app port
+const port = process.env.PORT || 80; //Set up the app port
 const startApp = () => {
     //Starting with in memory simple db
     console.log('Server starting up with simple in memory db.......');
