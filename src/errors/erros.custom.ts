@@ -39,6 +39,6 @@ const errorResponses = {
     //
     createCustom,
 
-}
+};
 
 export default errorResponses;

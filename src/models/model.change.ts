@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import changeStatus from "../data/data.change";
 import errorResponses from "../errors/erros.custom";
 
@@ -27,37 +28,37 @@ export type ChangeResponseSchema = {
 }
 
 class ChangeInventory {
-    changeStatus: ChangeSchema
+    changeStatus: ChangeSchema;
     constructor() {
-        this.changeStatus = changeStatus
+        this.changeStatus = changeStatus;
     }
 
     /**Returns current change status */
     getChange(): ChangeSchema {
-        return this.changeStatus
+        return this.changeStatus;
     }
 
     /**Returns  change amount of particular denomination status */
-    findByDenom(denomination: number): Number | undefined {
+    findByDenom(denomination: number): number | undefined {
         type changeStatusKey = keyof typeof this.changeStatus
-        const statusKey = denomination as changeStatusKey
+        const statusKey = denomination as changeStatusKey;
 
-        return this.changeStatus[statusKey]
+        return this.changeStatus[statusKey];
     }
 
     /**Returns  change amount of particular denomination status */
     findChange(changeAmount: number): ChangeResponseSchema | undefined {
-        let remainingChange: number = changeAmount
-        let changeDenominations: ChangeResponseSchema = {}
+        let remainingChange: number = changeAmount;
+        let changeDenominations: ChangeResponseSchema = {};
 
         type changeStatusKey = keyof typeof this.changeStatus
-        const denominations = Object.keys(this.changeStatus).sort((a, b) => parseInt(b) - parseInt(a))
+        const denominations = Object.keys(this.changeStatus).sort((a, b) => parseInt(b) - parseInt(a));
 
         denominations.forEach(property => {
             //Load our current denomination amount
-            const currentDenom = property as unknown as changeStatusKey
+            const currentDenom = property as unknown as changeStatusKey;
             //Load our the number of notes/coins of our current denomination
-            const currentDenomQty: number = this.changeStatus[currentDenom]
+            const currentDenomQty: number = this.changeStatus[currentDenom];
 
             if (remainingChange >= currentDenom) {
                 //Get the number of notes/coins needed
@@ -68,18 +69,18 @@ class ChangeInventory {
                     availableDenomQty = currentDenomQty; //set to the max number
                 }
                 //deduct from remaining change
-                remainingChange -= (availableDenomQty * currentDenom)
+                remainingChange -= (availableDenomQty * currentDenom);
                 //add to change denominations result
-                changeDenominations[currentDenom] = availableDenomQty
+                changeDenominations[currentDenom] = availableDenomQty;
             }
         });
 
         // If change still remaining no sufficient change in inventory was available
         if (remainingChange != 0) {
-            return undefined
+            return undefined;
         }
         //Return changeAmount
-        return changeDenominations
+        return changeDenominations;
     }
 
     /**Adds change to the inventory */
@@ -91,7 +92,7 @@ class ChangeInventory {
                 return undefined;
             }
         }
-        return this.changeStatus = change
+        return this.changeStatus = change;
     }
 
 
@@ -102,22 +103,22 @@ class ChangeInventory {
 
         // update the new change
         for (const property in changeDenominations) {
-            const currentDenom = property as unknown as changeStatusKey
-            const currentDenomQty = changeDenominations[currentDenom]
+            const currentDenom = property as unknown as changeStatusKey;
+            const currentDenomQty = changeDenominations[currentDenom];
 
             if (this.changeStatus[currentDenom] == undefined) {
-                throw new errorResponses.BadRequest(`There is no ${currentDenom} denomination`)
+                throw new errorResponses.BadRequest(`There is no ${currentDenom} denomination`);
             }
             if (deduct) {
-                this.changeStatus[currentDenom] -= currentDenomQty || 0
+                this.changeStatus[currentDenom] -= currentDenomQty || 0;
             } else {
-                this.changeStatus[currentDenom] += currentDenomQty || 0
+                this.changeStatus[currentDenom] += currentDenomQty || 0;
             }
         }
-        return this.changeStatus
+        return this.changeStatus;
     }
 
 }
 
-const changeInventory = new ChangeInventory()
-export default changeInventory
+const changeInventory = new ChangeInventory();
+export default changeInventory;

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vendingmachine
+spec:
+  selector:
+    app: vendingmachine
+  ports:
+    - port: 80
+      targetPort: serverport
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vendingmachine
+spec:
+  selector:
+    matchLabels:
+      app: vendingmachine
+  template:
+    metadata:
+      labels:
+        app: vendingmachine
+    spec:
+      containers:
+        - name: vendingmachine
+          image: samndirangu/vendingmachine
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              name: serverport
+          env:
+            - name: PORT
+              value: "80"

@@ -1,6 +1,6 @@
-import { ProductSchema } from "../models/model.products"
+import { ProductSchema } from "../models/model.products";
 
-var productsInventory: ProductSchema[] = [
+const productsInventory: ProductSchema[] = [
     {
         "_id": "6368c98238712fe1826dca2a",
         "name": "juicyfruit",
@@ -37,6 +37,6 @@ var productsInventory: ProductSchema[] = [
         "quantity": 1,
         "price": 1231
     }
-]
+];
 
-export default productsInventory
+export default productsInventory;

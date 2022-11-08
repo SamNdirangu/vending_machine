@@ -1,4 +1,5 @@
-require('dotenv').config(); //Grab our envs
+import dotenv from 'dotenv';
+dotenv.config(); //Grab our envs
 import express from 'express';
 import 'express-async-errors'; //Automatically handles errors thrown from async functions eliminating need for try and catch
 import apiRouter from './routers/api.router';
@@ -12,11 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 
 
 //API Endpoits Router ---------------------------------
-app.use('/api', apiRouter) //Add our API Router endpoint
+app.use('/api', apiRouter); //Add our API Router endpoint
 
 // Error Handlers -------------------------------------
-app.use(notFoundResponse)
-app.use(errorHandlers) //Requires express-async-erros
+app.use(notFoundResponse);
+app.use(errorHandlers); //Requires express-async-erros
 
 // Start our app ---------------------------------------
 const port = 3000 || process.env.PORT; //Set up the app port
@@ -28,4 +29,4 @@ const startApp = () => {
     });
 };
 
-startApp()
+startApp();

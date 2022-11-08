@@ -4,25 +4,25 @@ import errorResponses from "../errors/erros.custom";
 export type ProductSchema = {
     _id: string,
     name: string,
-    quantity: number,
-    price: number
+    price: number,
+    quantity: number
 }
 
 class Products {
-    productsInventory: ProductSchema[]
+    productsInventory: ProductSchema[];
     constructor() {
-        this.productsInventory = productsInventory
+        this.productsInventory = productsInventory;
     }
 
 
     /**Returns all products*/
     findAll(): ProductSchema[] | undefined {
-        return this.productsInventory
+        return this.productsInventory;
     }
 
     /**Returns a product based on its ID */
     findByID(id: string): ProductSchema | undefined {
-        let result
+        let result;
         for (let i = 0; i < this.productsInventory.length; i++) {
             const product = this.productsInventory[i];
             if (product._id == id) {
@@ -30,18 +30,18 @@ class Products {
                 break;
             }
         }
-        return result
+        return result;
     }
 
     /**Creates a new product based on its ID */
     create(name: string, quantity: number, price: number): ProductSchema | undefined {
-        const _id: string = name + (this.productsInventory.length + 1).toString()
+        const _id: string = name + (this.productsInventory.length + 1).toString();
         const product: ProductSchema = {
             _id, name, quantity, price
-        }
-        this.productsInventory.push(product)
+        };
+        this.productsInventory.push(product);
 
-        return product
+        return product;
     }
 
     /**Adds a product quantiyt */
@@ -55,10 +55,10 @@ class Products {
                 }
 
                 if (product.quantity < quantity) {
-                    throw new errorResponses.BadRequest(`Quantity to deduct cannot exceed existing quantity`)
+                    throw new errorResponses.BadRequest(`Quantity to deduct cannot exceed existing quantity`);
                 }
 
-                this.productsInventory[index].quantity -= quantity
+                this.productsInventory[index].quantity -= quantity;
                 return this.productsInventory[index];
             }
         }
@@ -66,5 +66,5 @@ class Products {
     }
 }
 
-const products = new Products()
-export default products
+const products = new Products();
+export default products;

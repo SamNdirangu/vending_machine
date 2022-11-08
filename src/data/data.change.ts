@@ -11,6 +11,6 @@ const changeStatus: ChangeSchema = {
     10: 23,
     5: 32,
     1: 43
-}
+};
 
 export default changeStatus;
