@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "fb71f368-fca4-4087-aa5d-faccfd6cd9ea",
+		"name": "Browser Testing Change & Products",
+		"description": "Easy quick browser testing using a GET method",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "10452867-fb71f368-fca4-4087-aa5d-faccfd6cd9ea"
+	},
+	"item": [
+		{
+			"name": "Get Products",
+			"id": "8d26593d-6191-4423-ab72-097a22abf7d6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/products",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "Returns all product"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by ID",
+			"id": "e0c6cf16-bcb7-4d2b-8ab4-5b873c2d9604",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/products/6368c98238712fe1826dca2a",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"6368c98238712fe1826dca2a"
+					]
+				},
+				"description": "Get a specific product type using its ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Handle Purchase using GET",
+			"id": "4131e08a-cc92-4e31-a781-08aaa97e1af6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/products/purchase/get?id=6368c98238712fe1826dca2a&quantity=1&amount=1320",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"purchase",
+						"get"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6368c98238712fe1826dca2a"
+						},
+						{
+							"key": "quantity",
+							"value": "1"
+						},
+						{
+							"key": "amount",
+							"value": "1320"
+						}
+					]
+				},
+				"description": "Same as handle purchase with post except using GET method with the values ID, quantity, amount as query params"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"id": "f38ba212-ed85-4b2d-9a7d-955021b603e5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/product/create?name=Fanta&quantity=222&price=60",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"product",
+						"create"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Fanta",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "222",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "60",
+							"type": "text"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product quantity",
+			"id": "115de286-7cd4-4c55-80f6-c59ec864eac9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/product/add/6368c98238712fe1826dca2a?quantity=20",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"product",
+						"add",
+						"6368c98238712fe1826dca2a"
+					],
+					"query": [
+						{
+							"key": "quantity",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Change",
+			"id": "539c6c4f-6ecd-4445-8909-0d0aa39f9e86",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change"
+					]
+				},
+				"description": "Returns the current status of our change inventory, That is the quantity of different money denominations in the vending machine"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Change Inventory",
+			"id": "67e789bb-584f-4efb-aac3-5f3c4c2c4fcc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change/set?changeJSON={\"1000\": 10,\"500\": 6,\"200\": 8,\"100\": 4,\"50\": 12,\"40\": 11,\"20\": 31,\"10\": 23,\"5\": 32,\"1\": 43}",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change",
+						"set"
+					],
+					"query": [
+						{
+							"key": "changeJSON",
+							"value": "{\"1000\": 10,\"500\": 6,\"200\": 8,\"100\": 4,\"50\": 12,\"40\": 11,\"20\": 31,\"10\": 23,\"5\": 32,\"1\": 43}"
+						}
+					]
+				},
+				"description": "Swaps the existing change inventory with the provided change inventory"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Change Inventory",
+			"id": "97c83f17-f661-480d-a1a0-5af7c7aba245",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change/update/?deduct=true&changeJSON={\"1000\": 5, \"10\":7}",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change",
+						"update",
+						""
+					],
+					"query": [
+						{
+							"key": "deduct",
+							"value": "true"
+						},
+						{
+							"key": "changeJSON",
+							"value": "{\"1000\": 5, \"10\":7}"
+						}
+					]
+				},
+				"description": "Adds or subtracts change from the change inventory\n\nProvide a true/false detect key\n\nProvide a changeJSON key such as {\"1000\":1, \"20\":22} with any of the available denominations to either add or deduct"
+			},
+			"response": []
+		}
+	]
+}
