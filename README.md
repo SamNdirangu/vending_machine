@@ -3,7 +3,7 @@
 
 ## How To Run
  The server runs by default at port 80 can be changed by supplying the environment varible PORT to use your desired port.
- A live server to interact with may be available using the following link https://samvendingmachine.herokuapp.com/
+ A live server to interact with may be available using the following link https://sam-vending-machine.herokuapp.com/
 
 ### Using Node 
  Clone the code to your system, ensure nodejs is installed. Then run the  following commands to start the server. Default port is 80
