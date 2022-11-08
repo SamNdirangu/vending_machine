@@ -17,12 +17,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/products",
+					"raw": "{{serverurl}}/api/public/products",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
+						"public",
 						"products"
 					]
 				},
@@ -40,12 +41,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/products/6368c98238712fe1826dca2a",
+					"raw": "{{serverurl}}/api/public/products/6368c98238712fe1826dca2a",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
+						"public",
 						"products",
 						"6368c98238712fe1826dca2a"
 					]
@@ -64,15 +66,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/products/purchase/get?id=6368c98238712fe1826dca2a&quantity=1&amount=1320",
+					"raw": "{{serverurl}}/api/public/purchase?id=6368c98238712fe1826dca2a&quantity=1&amountJSON={\"500\":3}",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
-						"products",
-						"purchase",
-						"get"
+						"public",
+						"purchase"
 					],
 					"query": [
 						{
@@ -84,8 +85,8 @@
 							"value": "1"
 						},
 						{
-							"key": "amount",
-							"value": "1320"
+							"key": "amountJSON",
+							"value": "{\"500\":3}"
 						}
 					]
 				},
@@ -139,7 +140,7 @@
 			"response": []
 		},
 		{
-			"name": "Add Product quantity",
+			"name": "Update Product",
 			"id": "115de286-7cd4-4c55-80f6-c59ec864eac9",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -152,7 +153,7 @@
 					"urlencoded": []
 				},
 				"url": {
-					"raw": "{{serverurl}}/api/maintainance/product/add/6368c98238712fe1826dca2a?quantity=20",
+					"raw": "{{serverurl}}/api/maintainance/product/update/6368c98238712fe1826dca2a?quantity=20&price=50",
 					"host": [
 						"{{serverurl}}"
 					],
@@ -160,13 +161,17 @@
 						"api",
 						"maintainance",
 						"product",
-						"add",
+						"update",
 						"6368c98238712fe1826dca2a"
 					],
 					"query": [
 						{
 							"key": "quantity",
 							"value": "20"
+						},
+						{
+							"key": "price",
+							"value": "50"
 						}
 					]
 				}
@@ -198,37 +203,6 @@
 			"response": []
 		},
 		{
-			"name": "Set Change Inventory",
-			"id": "67e789bb-584f-4efb-aac3-5f3c4c2c4fcc",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{serverurl}}/api/maintainance/change/set?changeJSON={\"1000\": 10,\"500\": 6,\"200\": 8,\"100\": 4,\"50\": 12,\"40\": 11,\"20\": 31,\"10\": 23,\"5\": 32,\"1\": 43}",
-					"host": [
-						"{{serverurl}}"
-					],
-					"path": [
-						"api",
-						"maintainance",
-						"change",
-						"set"
-					],
-					"query": [
-						{
-							"key": "changeJSON",
-							"value": "{\"1000\": 10,\"500\": 6,\"200\": 8,\"100\": 4,\"50\": 12,\"40\": 11,\"20\": 31,\"10\": 23,\"5\": 32,\"1\": 43}"
-						}
-					]
-				},
-				"description": "Swaps the existing change inventory with the provided change inventory"
-			},
-			"response": []
-		},
-		{
 			"name": "Update Change Inventory",
 			"id": "97c83f17-f661-480d-a1a0-5af7c7aba245",
 			"protocolProfileBehavior": {
@@ -238,7 +212,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/maintainance/change/update/?deduct=true&changeJSON={\"1000\": 5, \"10\":7}",
+					"raw": "{{serverurl}}/api/maintainance/change/update?update=true&changeJSON={\"1000\": 5, \"10\":-7}",
 					"host": [
 						"{{serverurl}}"
 					],
@@ -246,17 +220,16 @@
 						"api",
 						"maintainance",
 						"change",
-						"update",
-						""
+						"update"
 					],
 					"query": [
 						{
-							"key": "deduct",
+							"key": "update",
 							"value": "true"
 						},
 						{
 							"key": "changeJSON",
-							"value": "{\"1000\": 5, \"10\":7}"
+							"value": "{\"1000\": 5, \"10\":-7}"
 						}
 					]
 				},

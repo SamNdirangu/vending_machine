@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "175aa75d-48bc-4f1a-8db7-5992c45bd068",
+		"name": "maintainance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "10452867-175aa75d-48bc-4f1a-8db7-5992c45bd068"
+	},
+	"item": [
+		{
+			"name": "Create Product",
+			"id": "3d872095-0ca2-428f-84a6-05fe68c4fe58",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Fanta",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "222",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "60",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/product/create",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"product",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"id": "75334734-8bc2-4e43-a810-7d016f10db9d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "quantity",
+							"value": "20",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "price",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/product/update/6368c9829e26fa6eeb61ba5e",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"product",
+						"update",
+						"6368c9829e26fa6eeb61ba5e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Change",
+			"id": "912ea856-7775-480e-8998-e311d4247adb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change"
+					]
+				},
+				"description": "Returns the current status of our change inventory, That is the quantity of different money denominations in the vending machine"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Change Inventory",
+			"id": "f7e60d05-7669-4489-aa3e-dd0d8d54e979",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "update",
+							"value": "true",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "changeJSON",
+							"value": "{\"1000\": 5, \"10\":-7}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{serverurl}}/api/maintainance/change",
+					"host": [
+						"{{serverurl}}"
+					],
+					"path": [
+						"api",
+						"maintainance",
+						"change"
+					]
+				},
+				"description": "Adds or subtracts change from the change inventory\n\nProvide a true/false detect key\n\nProvide a changeJSON key such as {\"1000\":1, \"20\":22} with any of the available denominations to either add or deduct"
+			},
+			"response": []
+		}
+	]
+}

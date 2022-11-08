@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "175aa75d-48bc-4f1a-8db7-5992c45bd068",
-		"name": "Products",
+		"_postman_id": "cf15517d-9006-45ea-b677-94dcd7f4beba",
+		"name": "Regular or Public",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "10452867-175aa75d-48bc-4f1a-8db7-5992c45bd068"
+		"_uid": "10452867-cf15517d-9006-45ea-b677-94dcd7f4beba"
 	},
 	"item": [
 		{
 			"name": "Get Products",
-			"id": "2b3fd19c-0ff0-40cf-a4b9-0714bea697fa",
+			"id": "dab559d3-4bf9-402d-aae1-952f1035b863",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -16,12 +16,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/products",
+					"raw": "{{serverurl}}/api/public/products",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
+						"public",
 						"products"
 					]
 				},
@@ -31,7 +32,7 @@
 		},
 		{
 			"name": "Get Product by ID",
-			"id": "bb621f98-de1a-4fb9-831e-37492d32d447",
+			"id": "4b424992-4863-4b18-8ce9-276b38e62577",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -39,14 +40,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/products/6368c98238712fe1826dca2a",
+					"raw": "{{serverurl}}/api/public/products/6368c9829e26fa6eeb61ba5e",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
+						"public",
 						"products",
-						"6368c98238712fe1826dca2a"
+						"6368c9829e26fa6eeb61ba5e"
 					]
 				},
 				"description": "Get a specific product type using its ID"
@@ -55,7 +57,7 @@
 		},
 		{
 			"name": "Handle Purchase using GET",
-			"id": "05adb8b7-a1c2-48d1-8a0a-a840fd71b4ff",
+			"id": "ddaa9101-7a6f-4bc9-a3b2-17a0e6d575ac",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -63,15 +65,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{serverurl}}/api/products/purchase/get?id=6368c98238712fe1826dca2a&quantity=1&amount=1320",
+					"raw": "{{serverurl}}/api/public/purchase/?id=6368c98238712fe1826dca2a&quantity=1&amountJSON={\"500\":4}",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
-						"products",
+						"public",
 						"purchase",
-						"get"
+						""
 					],
 					"query": [
 						{
@@ -83,8 +85,8 @@
 							"value": "1"
 						},
 						{
-							"key": "amount",
-							"value": "1320"
+							"key": "amountJSON",
+							"value": "{\"500\":4}"
 						}
 					]
 				},
@@ -94,7 +96,7 @@
 		},
 		{
 			"name": "Handle Purchase using POST",
-			"id": "88d0e6d4-ceb0-4db1-a426-ce5c1f374552",
+			"id": "f835ced7-4ad9-4ce7-9b90-4dcc67e7d512",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -115,102 +117,24 @@
 							"type": "text"
 						},
 						{
-							"key": "amount",
-							"value": "2000",
+							"key": "amountJSON",
+							"value": "{\"1000\":2}",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{serverurl}}/api/products/purchase/",
+					"raw": "{{serverurl}}/api/public/purchase",
 					"host": [
 						"{{serverurl}}"
 					],
 					"path": [
 						"api",
-						"products",
-						"purchase",
-						""
+						"public",
+						"purchase"
 					]
 				},
 				"description": "Make a product purchase by providing the following;\n\nproduct ID, Quantity and Amount.\n\nIf successful will return true and the total change amount and in denominations"
-			},
-			"response": []
-		},
-		{
-			"name": "Create Product",
-			"id": "3d872095-0ca2-428f-84a6-05fe68c4fe58",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "name",
-							"value": "Fanta",
-							"type": "text"
-						},
-						{
-							"key": "quantity",
-							"value": "222",
-							"type": "text"
-						},
-						{
-							"key": "price",
-							"value": "60",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{serverurl}}/api/maintainance/product",
-					"host": [
-						"{{serverurl}}"
-					],
-					"path": [
-						"api",
-						"maintainance",
-						"product"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Product quantity",
-			"id": "75334734-8bc2-4e43-a810-7d016f10db9d",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "quantity",
-							"value": "20",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{serverurl}}/api/maintainance/product/6368c98238712fe1826dca2a",
-					"host": [
-						"{{serverurl}}"
-					],
-					"path": [
-						"api",
-						"maintainance",
-						"product",
-						"6368c98238712fe1826dca2a"
-					]
-				}
 			},
 			"response": []
 		}
