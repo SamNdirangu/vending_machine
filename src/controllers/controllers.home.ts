@@ -11,12 +11,12 @@ const homepage = async (req: express.Request, res: express.Response) => {
             <br>
             <p>Quick Links</p>
             <p> 
-                <a href="/api/products/" target="_blank">
+                <a href="/api/public/products/" target="_blank">
                     Get All Products
                 </a>
             </p>
             <p> 
-                <a href="/api/products/purchase/get?id=6368c982eef7cf49cfb99d75&quantity=1&amount=1320" target="_blank">
+                <a href="/api/public/purchase?id=6368c982eef7cf49cfb99d75&quantity=1&amountJSON={"1000":2}" target="_blank">
                     Purchase Random Product Oreos
                 </a>
             </p>

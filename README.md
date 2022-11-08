@@ -2,7 +2,7 @@
  A REST API simulation of a vending machine. The project is done using NodeJS Express with Typescript. The Server is not coupled with any database.
 
 ## How To Run
- The server runs by default at port 80 can be changed by supplying the environment varible PORT to use your desired port.
+ The server runs by default at port 80 can be changed by supplying the environment variable PORT to use your desired port.
  A live server to interact with may be available using the following link https://sam-vending-machine.herokuapp.com/
 
 ### Using Node 
@@ -37,8 +37,9 @@
  
  Using POST method:
     
-    POST method: <hostURL:PORT>/api/products/purchase<productID>
-    Required Body values
+    POST method: <hostURL:PORT>/api/products/purchase
+ Required Body values
+ 
     id: productID
     quantity: number of product
     amountJSON: amount of money in denominations eg 1 500$ Note 2 20$ coins {"500":1, "20":2}
@@ -83,7 +84,7 @@ Using GET Method (For easing testing with browser) -- similar as post
     GET method: <hostURL:PORT>/api/maintainance/change
 
 
-### 4 Adding or Dedcuting denominations of money from the change inventory
+### 4 Adding or Deducuting denominations of money from the change inventory
 
       PATCH method: <hostURL:PORT>/api/maintainance/change
 Requred Values
