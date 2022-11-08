@@ -1,0 +1,13 @@
+.postman
+node_modules
+dist
+postman
+dockerignore
+.eslintrc.json
+.gitattributes
+.gitignore
+deployment.yml
+docker-compose.yml
+dockerfile
+LICENSE
+README.md
